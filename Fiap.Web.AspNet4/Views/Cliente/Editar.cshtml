@@ -9,6 +9,11 @@
             <div class="well">
                 <h2>Cliente - Editar</h2>
 
+                @if (!String.IsNullOrEmpty((String)TempData["Mensagem"]))
+                {
+                    <div class="alert alert-warning" role="alert">@TempData["Mensagem"]</div>
+                }
+
                 <form asp-action="Editar" method="post">
                     <input type="hidden" name="ClienteId" value="@Model.ClienteId" />
                     <div class="form-group">

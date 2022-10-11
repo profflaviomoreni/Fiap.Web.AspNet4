@@ -33,9 +33,9 @@
             <td data-field="name">@cliente.Nome</td>
             <td data-field="sobrenome">@cliente.Sobrenome</td>
             <td class="actions" width="220">
-                    <a asp-controller="Cliente" asp-action="Detalhe" asp-route-id="@cliente.ClienteId">Detalhe</a>
-                <a asp-controller="Cliente" asp-action="Editar" asp-route-id="@cliente.ClienteId">Editar</a>
-                <a href="/Cliente/Remover/@cliente.ClienteId">Remover</a>
+                <a asp-controller="Cliente" asp-action="Detalhe"    asp-route-id="@cliente.ClienteId">Detalhe</a>
+                <a asp-controller="Cliente" asp-action="Editar"     asp-route-id="@cliente.ClienteId">Editar</a>
+                <a asp-controller="Cliente" asp-action="Remover"    asp-route-id="@cliente.ClienteId">Remover</a>
             </td>
         </tr>
         }

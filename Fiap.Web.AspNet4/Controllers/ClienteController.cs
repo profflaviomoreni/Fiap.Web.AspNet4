@@ -121,12 +121,21 @@ namespace Fiap.Web.AspNet4.Controllers
         [HttpPost]
         public IActionResult Editar(ClienteModel clienteModel)
         {
-            // UPDATE tabela VALUES ...
-            Console.WriteLine(clienteModel.Email);
 
-            TempData["Mensagem"] = "Cliente editado com sucesso";
 
-            return RedirectToAction("Index");
+            if (String.IsNullOrEmpty(clienteModel.Nome) || String.IsNullOrEmpty(clienteModel.Email))
+            {
+                TempData["Mensagem"] = "O nome do cliente ou email não pode ser nulo ou branco";
+                return View(clienteModel);
+                //return RedirectToAction("Editar", new { id = clienteModel.ClienteId });
+            } 
+             else
+            {
+                // UPDATE tabela VALUES ...
+                TempData["Mensagem"] = "Cliente editado com sucesso";
+                return RedirectToAction("Index");
+            }
+
         }
 
 
@@ -142,6 +151,7 @@ namespace Fiap.Web.AspNet4.Controllers
         [HttpGet]
         public IActionResult Detalhe(int id)
         {
+            // var cliente = "SELECT ... FROM cliente WHERE Id = {id}";
             var clienteModel = new ClienteModel();
 
             if (id == 1)
@@ -180,6 +190,7 @@ namespace Fiap.Web.AspNet4.Controllers
 
             return View(clienteModel);
         }
+
 
     }
 }
