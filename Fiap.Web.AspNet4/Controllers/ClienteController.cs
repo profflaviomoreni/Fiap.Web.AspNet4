@@ -121,19 +121,14 @@ namespace Fiap.Web.AspNet4.Controllers
         [HttpPost]
         public IActionResult Editar(ClienteModel clienteModel)
         {
-
-
-            if (String.IsNullOrEmpty(clienteModel.Nome) || String.IsNullOrEmpty(clienteModel.Email))
-            {
-                TempData["Mensagem"] = "O nome do cliente ou email não pode ser nulo ou branco";
-                return View(clienteModel);
-                //return RedirectToAction("Editar", new { id = clienteModel.ClienteId });
-            } 
-             else
-            {
+            if ( ModelState.IsValid  ) {
                 // UPDATE tabela VALUES ...
                 TempData["Mensagem"] = "Cliente editado com sucesso";
                 return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(clienteModel);
             }
 
         }
