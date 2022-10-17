@@ -1,17 +1,46 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model ClienteModel
 
 
-<h1>Novo Cliente</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="well">
+                <h2>Cliente - Novo</h2>
 
-<form asp-controller="Cliente" asp-action="Novo" method="post">
-    <label>Nome</label>
-    <input type ="text" name="Nome" />
-    
-    <label>Sobrenome</label>
-    <input type ="text" name="Sobrenome" />
-    <input type ="submit" value="Enviar" />
-</form>
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div asp-validation-summary="All" class="alert alert-warning" role="alert"></div>
+                }
+
+                <form asp-action="Novo" method="post">
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Nome"></label>
+                        <input class="form-control col-5" asp-for="Nome" />
+                        <span class="text-danger" asp-validation-for="Nome"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Email"></label>
+                        <input class="form-control col-5" asp-for="Email" />
+                        <span class="text-danger" asp-validation-for="Email"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" asp-for="DataNascimento"></label>
+                        <input class="form-control col-5" asp-for="DataNascimento" />
+                        <span class="text-danger" asp-validation-for="DataNascimento"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Observacao"></label>
+                        <textarea class="form-control" asp-for="Observacao"></textarea>
+                        <span class="text-danger" asp-validation-for="Observacao"></span>
+                    </div>
+
+                    <a href="#" class="btn btn-default btn-lg">Cancelar</a>
+                    <button type="submit" class="btn btn-primary btn-lg">Gravar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -63,14 +63,16 @@ namespace Fiap.Web.AspNet4.Controllers
         [HttpPost]
         public IActionResult Novo(ClienteModel clienteModel)
         {
-            Console.WriteLine(clienteModel.Nome);
-            Console.WriteLine(clienteModel.Sobrenome);
-
-            // ClasseBancoDados.Insert( clienteModel );
-
-            TempData["Mensagem"] = "Cliente inserido com sucesso";
-
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                // UPDATE tabela VALUES ...
+                TempData["Mensagem"] = "Cliente cadastrado com sucesso";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(clienteModel);
+            }
         }
 
 
