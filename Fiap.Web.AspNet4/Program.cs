@@ -1,7 +1,15 @@
+using Fiap.Web.AspNet4.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var connectionString = builder.Configuration.GetConnectionString("databaseUrl");
+builder.Services.AddDbContext<DataContext>(options => 
+    options.UseSqlServer(connectionString).EnableSensitiveDataLogging(true)
+);
 
 var app = builder.Build();
 
