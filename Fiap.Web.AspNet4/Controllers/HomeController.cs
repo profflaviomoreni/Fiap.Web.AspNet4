@@ -1,4 +1,5 @@
-﻿using Fiap.Web.AspNet4.Models;
+﻿using Fiap.Web.AspNet4.Data;
+using Fiap.Web.AspNet4.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -8,9 +9,12 @@ namespace Fiap.Web.AspNet4.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly DataContext dataContext;
+
+        public HomeController(ILogger<HomeController> logger, DataContext ctx)
         {
             _logger = logger;
+            dataContext = ctx;
         }
 
         public IActionResult Index()
@@ -20,6 +24,45 @@ namespace Fiap.Web.AspNet4.Controllers
 
         public IActionResult Privacy()
         {
+
+            /*
+            RepresentanteModel model = new RepresentanteModel();
+            model.RepresentanteId = 3;
+            model.NomeRepresentante = "Flavio Updated";
+
+            dataContext.Representantes.Update(model);
+            dataContext.SaveChanges();
+            */
+
+            /*
+            RepresentanteModel model = new RepresentanteModel();
+            model.RepresentanteId = 2;
+
+            dataContext.Representantes.Remove(model);
+            dataContext.SaveChanges();
+            */
+
+
+
+            /*
+            var representantes = dataContext.Representantes.ToList();
+            Console.WriteLine(representantes.Count());
+            */
+
+            /*
+            var representante = dataContext.Representantes.Find(2);
+            Console.WriteLine(representante.NomeRepresentante);
+            */
+
+            /*
+            RepresentanteModel model = new RepresentanteModel();
+            model.NomeRepresentante = "Fabricio";
+            model.Token = "Fabricio";
+
+            dataContext.Representantes.Add(model);
+            dataContext.SaveChanges();
+            */
+
             return View();
         }
 
