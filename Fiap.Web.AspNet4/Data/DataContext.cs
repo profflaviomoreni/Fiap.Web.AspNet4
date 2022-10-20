@@ -8,6 +8,8 @@ namespace Fiap.Web.AspNet4.Data
 
         public DbSet<RepresentanteModel> Representantes { get; set; }
 
+        public DbSet<FornecedorModel> Fornecedores { get; set; }
+
 
         public DataContext(DbContextOptions options) : base(options)
         {
