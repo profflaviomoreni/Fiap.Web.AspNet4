@@ -10,6 +10,10 @@ namespace Fiap.Web.AspNet4.Data
 
         public DbSet<FornecedorModel> Fornecedores { get; set; }
 
+        public DbSet<GerenteModel> Gerentes { get; set; }
+
+        public DbSet<ClienteModel> Clientes { get; set; }
+
 
         public DataContext(DbContextOptions options) : base(options)
         {

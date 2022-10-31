@@ -1,54 +1,25 @@
-﻿using Fiap.Web.AspNet4.Models;
+﻿using Fiap.Web.AspNet4.Data;
+using Fiap.Web.AspNet4.Models;
+using Fiap.Web.AspNet4.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Fiap.Web.AspNet4.Controllers
 {
     public class ClienteController : Controller
     {
+
+        private readonly ClienteRepository clienteRepository;
+
+        public ClienteController(DataContext dataContext)
+        {
+            clienteRepository = new ClienteRepository(dataContext);
+        }
+
+
         [HttpGet]
         public IActionResult Index()
         {
-            // var resultado = SELECT * FROM tabelaCliente;
-
-            var listaClientes = new List<ClienteModel>();
-            listaClientes.Add(new ClienteModel
-            {
-                ClienteId = 1,
-                Nome = "Flávio",
-                Email = "fmoreni@gmail.com",
-                DataNascimento = DateTime.Now,
-                Observacao = "OBS1"
-            });
-            listaClientes.Add(new ClienteModel
-            {
-                ClienteId = 2,
-                Nome = "Eduardo",
-                Email = "eduardo@gmail.com",
-                DataNascimento = DateTime.Now,
-                Observacao = "OBS3"
-            });
-            listaClientes.Add(new ClienteModel
-            {
-                ClienteId = 3,
-                Nome = "Moreni",
-                Email = "moreni@gmail.com",
-                DataNascimento = DateTime.Now,
-                Observacao = "OBS3"
-            });
-            listaClientes.Add(new ClienteModel
-            {
-                ClienteId = 4,
-                Nome = "Luan",
-                Email = "luan@gmail.com",
-                DataNascimento = DateTime.Now,
-                Observacao = "OBS4"
-            });
-
-
-            //ViewBag.Clientes = listaClientes;
-            //ViewData["Clientes"] = listaClientes;
-            //TempData["Clientes"] = listaClientes;
-
+            var listaClientes = clienteRepository.FindAll();
             return View(listaClientes);
         }
 
@@ -148,43 +119,7 @@ namespace Fiap.Web.AspNet4.Controllers
         [HttpGet]
         public IActionResult Detalhe(int id)
         {
-            // var cliente = "SELECT ... FROM cliente WHERE Id = {id}";
-            var clienteModel = new ClienteModel();
-
-            if (id == 1)
-            {
-                clienteModel = new ClienteModel
-                {
-                    ClienteId = 1,
-                    Nome = "Flavio",
-                    Email = "fmoreni@gmail.com",
-                    DataNascimento = DateTime.Now,
-                    Observacao = "OBS1"
-                };
-            }
-            else if (id == 2)
-            {
-                clienteModel = new ClienteModel
-                {
-                    ClienteId = 2,
-                    Nome = "Eduardo",
-                    Email = "eduardo@gmail.com",
-                    DataNascimento = DateTime.Now,
-                    Observacao = "OBS3"
-                };
-            }
-            else
-            {
-                clienteModel = new ClienteModel
-                {
-                    ClienteId = 3,
-                    Nome = "Moreni",
-                    Email = "moreni@gmail.com",
-                    DataNascimento = DateTime.Now,
-                    Observacao = "OBS3"
-                };
-            }
-
+            var clienteModel = clienteRepository.FindById(id);
             return View(clienteModel);
         }
 
