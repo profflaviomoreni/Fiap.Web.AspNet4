@@ -34,7 +34,7 @@
 
                     <div class="form-group">
                         <label class="control-label" asp-for="RepresentanteId"></label>
-                        <select asp-for="RepresentanteId" asp-items="@ViewBag.representantes">
+                        <select asp-for="RepresentanteId" asp-items="@ViewBag.representantes" class="form-control col-5">
                             <option value="">Selecione</option>
                         </select>
                         <span class="text-danger" asp-validation-for="RepresentanteId"></span>

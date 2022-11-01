@@ -35,6 +35,7 @@ namespace Fiap.Web.AspNet4.Models
 
 
         //FK
+        [Display(Name = "Representante")]
         public int RepresentanteId { get; set; }
 
         //Navigation Object

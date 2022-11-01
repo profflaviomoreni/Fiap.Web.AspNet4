@@ -29,8 +29,7 @@ namespace Fiap.Web.AspNet4.Controllers
         [HttpGet]
         public IActionResult Novo()
         {
-            var listaRepresentantes = representanteRepository.FindAll();
-            ViewBag.Representantes = listaRepresentantes;
+            ComboRepresentantes();
 
             return View(new ClienteModel());
         }
@@ -47,8 +46,7 @@ namespace Fiap.Web.AspNet4.Controllers
             }
             else
             {
-                var listaRepresentantes = representanteRepository.FindAll();
-                ViewBag.Representantes = listaRepresentantes;
+                ComboRepresentantes();
 
                 return View(clienteModel);
             }
@@ -58,13 +56,7 @@ namespace Fiap.Web.AspNet4.Controllers
         [HttpGet]
         public IActionResult Editar(int id)
         {
-            /*
-            var listaRepresentantes = representanteRepository.FindAll();
-            var selectListRepresentantes = new SelectList(listaRepresentantes, "RepresentanteId", "NomeRepresentante");
-            ViewBag.representantes = selectListRepresentantes;
-            */
-
-            ViewBag.representantes = new SelectList(representanteRepository.FindAll(), "RepresentanteId", "NomeRepresentante");
+            ComboRepresentantes();
 
             var clienteModel = clienteRepository.FindById(id);
 
@@ -83,15 +75,13 @@ namespace Fiap.Web.AspNet4.Controllers
             }
             else
             {
-                var listaRepresentantes = representanteRepository.FindAll();
-                var selectListRepresentantes = new SelectList(listaRepresentantes, "RepresentanteId", "NomeRepresentante");
-                ViewBag.representantes = selectListRepresentantes;
-
+                ComboRepresentantes();
                 return View(clienteModel);
             }
 
         }
 
+        
 
         [HttpGet]
         public IActionResult Remover(int id)
@@ -109,6 +99,14 @@ namespace Fiap.Web.AspNet4.Controllers
             return View(clienteModel);
         }
 
+
+
+        private void ComboRepresentantes()
+        {
+            var listaRepresentantes = representanteRepository.FindAll();
+            var selectListRepresentantes = new SelectList(listaRepresentantes, "RepresentanteId", "NomeRepresentante");
+            ViewBag.representantes = selectListRepresentantes;
+        }
 
     }
 }

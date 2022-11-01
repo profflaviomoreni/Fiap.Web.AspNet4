@@ -33,19 +33,8 @@
 
                     <div class="form-group">
                         <label class="control-label" asp-for="RepresentanteId"></label>
-                        <select name="RepresentanteId" id="RepresentanteId">
+                        <select asp-for="RepresentanteId" asp-items="@ViewBag.representantes" class="form-control col-5">
                             <option value="">Selecione</option>
-                            @if (ViewBag.Representantes != null ) {
-                                foreach (var item in ViewBag.Representantes)
-                                {
-                                    if ( item.RepresentanteId == Model.RepresentanteId ) {
-                                        <option value="@item.RepresentanteId" selected>@item.NomeRepresentante</option>
-                                    } else {
-                                        <option value="@item.RepresentanteId">@item.NomeRepresentante</option>
-                                    }
-                                    
-                                }
-                            }
                         </select>
                         <span class="text-danger" asp-validation-for="RepresentanteId"></span>
                     </div>
