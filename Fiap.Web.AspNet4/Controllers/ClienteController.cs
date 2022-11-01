@@ -2,6 +2,7 @@
 using Fiap.Web.AspNet4.Models;
 using Fiap.Web.AspNet4.Repository;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Fiap.Web.AspNet4.Controllers
 {
@@ -9,10 +10,12 @@ namespace Fiap.Web.AspNet4.Controllers
     {
 
         private readonly ClienteRepository clienteRepository;
+        private readonly RepresentanteRepository representanteRepository;
 
         public ClienteController(DataContext dataContext)
         {
             clienteRepository = new ClienteRepository(dataContext);
+            representanteRepository = new RepresentanteRepository(dataContext);
         }
 
 
@@ -26,9 +29,10 @@ namespace Fiap.Web.AspNet4.Controllers
         [HttpGet]
         public IActionResult Novo()
         {
-            return View();
-            //return Content("Fiap Asp.NET Core");
-            //return RedirectToAction("Index");
+            var listaRepresentantes = representanteRepository.FindAll();
+            ViewBag.Representantes = listaRepresentantes;
+
+            return View(new ClienteModel());
         }
 
         [HttpPost]
@@ -36,12 +40,16 @@ namespace Fiap.Web.AspNet4.Controllers
         {
             if (ModelState.IsValid)
             {
-                // UPDATE tabela VALUES ...
+                clienteRepository.Insert(clienteModel);
+
                 TempData["Mensagem"] = "Cliente cadastrado com sucesso";
                 return RedirectToAction("Index");
             }
             else
             {
+                var listaRepresentantes = representanteRepository.FindAll();
+                ViewBag.Representantes = listaRepresentantes;
+
                 return View(clienteModel);
             }
         }
@@ -50,42 +58,15 @@ namespace Fiap.Web.AspNet4.Controllers
         [HttpGet]
         public IActionResult Editar(int id)
         {
-            // var cliente = "SELECT ... FROM cliente WHERE Id = {id}";
-            var clienteModel = new ClienteModel();
+            /*
+            var listaRepresentantes = representanteRepository.FindAll();
+            var selectListRepresentantes = new SelectList(listaRepresentantes, "RepresentanteId", "NomeRepresentante");
+            ViewBag.representantes = selectListRepresentantes;
+            */
 
-            if (id == 1)
-            {
-                clienteModel = new ClienteModel
-                {
-                    ClienteId = 1,
-                    Nome = "Flavio",
-                    Email = "fmoreni@gmail.com",
-                    DataNascimento = DateTime.Now,
-                    Observacao = "OBS1"
-                };
-            }
-            else if (id == 2)
-            {
-                clienteModel = new ClienteModel
-                {
-                    ClienteId = 2,
-                    Nome = "Eduardo",
-                    Email = "eduardo@gmail.com",
-                    DataNascimento = DateTime.Now,
-                    Observacao = "OBS3"
-                };
-            }
-            else
-            {
-                clienteModel = new ClienteModel
-                {
-                    ClienteId = 3,
-                    Nome = "Moreni",
-                    Email = "moreni@gmail.com",
-                    DataNascimento = DateTime.Now,
-                    Observacao = "OBS3"
-                };
-            }
+            ViewBag.representantes = new SelectList(representanteRepository.FindAll(), "RepresentanteId", "NomeRepresentante");
+
+            var clienteModel = clienteRepository.FindById(id);
 
             return View(clienteModel);
         }
@@ -95,12 +76,17 @@ namespace Fiap.Web.AspNet4.Controllers
         public IActionResult Editar(ClienteModel clienteModel)
         {
             if ( ModelState.IsValid  ) {
-                // UPDATE tabela VALUES ...
+                clienteRepository.Update(clienteModel);
+
                 TempData["Mensagem"] = "Cliente editado com sucesso";
                 return RedirectToAction("Index");
             }
             else
             {
+                var listaRepresentantes = representanteRepository.FindAll();
+                var selectListRepresentantes = new SelectList(listaRepresentantes, "RepresentanteId", "NomeRepresentante");
+                ViewBag.representantes = selectListRepresentantes;
+
                 return View(clienteModel);
             }
 
