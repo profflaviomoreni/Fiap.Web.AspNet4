@@ -1,9 +1,10 @@
 ﻿using Fiap.Web.AspNet4.Data;
 using Fiap.Web.AspNet4.Models;
+using Fiap.Web.AspNet4.Repository.Interface;
 
 namespace Fiap.Web.AspNet4.Repository
 {
-    public class RepresentanteRepository
+    public class RepresentanteRepository : IRepresentanteRepository
     {
 
         private readonly DataContext dataContext;

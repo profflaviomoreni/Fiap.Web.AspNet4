@@ -1,4 +1,6 @@
 using Fiap.Web.AspNet4.Data;
+using Fiap.Web.AspNet4.Repository;
+using Fiap.Web.AspNet4.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,11 @@ var connectionString = builder.Configuration.GetConnectionString("databaseUrl");
 builder.Services.AddDbContext<DataContext>(options => 
     options.UseSqlServer(connectionString).EnableSensitiveDataLogging(true)
 );
+
+builder.Services.AddScoped<IFornecedorRepository, FornecedorRepository>();
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+builder.Services.AddScoped<IRepresentanteRepository, RepresentanteRepository>();
+
 
 var app = builder.Build();
 

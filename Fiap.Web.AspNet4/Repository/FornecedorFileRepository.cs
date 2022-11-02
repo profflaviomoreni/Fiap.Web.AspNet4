@@ -4,20 +4,19 @@ using Fiap.Web.AspNet4.Repository.Interface;
 
 namespace Fiap.Web.AspNet4.Repository
 {
-    public class FornecedorRepository : IFornecedorRepository
+    public class FornecedorFileRepository : IFornecedorRepository
     {
-
         private readonly DataContext dataContext;
 
-        public FornecedorRepository(DataContext context)
+        public FornecedorFileRepository(DataContext context)
         {
-            dataContext = context;        
+            dataContext = context;
         }
 
 
         public List<FornecedorModel> FindAll()
         {
-            return dataContext.Fornecedores.ToList<FornecedorModel>();
+            return dataContext.Fornecedores.ToList();
         }
 
         public FornecedorModel FindById(int id)
@@ -49,7 +48,5 @@ namespace Fiap.Web.AspNet4.Repository
             dataContext.Fornecedores.Remove(fornecedorModel);
             dataContext.SaveChanges();
         }
-
-        
     }
 }

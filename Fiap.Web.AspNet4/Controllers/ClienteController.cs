@@ -1,6 +1,7 @@
 ﻿using Fiap.Web.AspNet4.Data;
 using Fiap.Web.AspNet4.Models;
 using Fiap.Web.AspNet4.Repository;
+using Fiap.Web.AspNet4.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -9,22 +10,42 @@ namespace Fiap.Web.AspNet4.Controllers
     public class ClienteController : Controller
     {
 
-        private readonly ClienteRepository clienteRepository;
-        private readonly RepresentanteRepository representanteRepository;
+        private readonly IClienteRepository clienteRepository;
+        private readonly IRepresentanteRepository representanteRepository;
 
-        public ClienteController(DataContext dataContext)
+        public ClienteController(IClienteRepository _clienteRepository, IRepresentanteRepository _representanteRepository )
         {
-            clienteRepository = new ClienteRepository(dataContext);
-            representanteRepository = new RepresentanteRepository(dataContext);
+            clienteRepository = _clienteRepository;
+            representanteRepository = _representanteRepository;
         }
 
 
         [HttpGet]
         public IActionResult Index()
         {
-            var listaClientes = clienteRepository.FindAll();
-            return View(listaClientes);
+            //var listaClientes = clienteRepository.FindAllOrderByNomeDesc();
+            //var listaClientes = clienteRepository.FindByNome("io");
+            //var listaClientes = clienteRepository.FindByNomeAndEmail("io","@gmail");
+            //var listaClientes = clienteRepository.FindByNomeAndEmailAndRepresentante("io","@gmail",0);
+            //var listaClientes = clienteRepository.FindByNomeAndEmailAndRepresentante("", "", 0);
+
+            ComboRepresentantes();
+
+            return View(new List<ClienteModel>());
         }
+
+        [HttpPost]
+        public IActionResult Pesquisar(string NomePesquisa, string EmailPesquisa, int RepresentanteId)
+        {
+            ComboRepresentantes();
+
+            var listaClientes = 
+                clienteRepository.FindByNomeAndEmailAndRepresentante(NomePesquisa, EmailPesquisa, RepresentanteId); 
+
+            return View("Index", listaClientes );
+        }
+
+
 
         [HttpGet]
         public IActionResult Novo()

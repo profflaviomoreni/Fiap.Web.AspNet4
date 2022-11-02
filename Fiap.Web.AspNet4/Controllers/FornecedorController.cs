@@ -1,6 +1,7 @@
 ﻿using Fiap.Web.AspNet4.Data;
 using Fiap.Web.AspNet4.Models;
 using Fiap.Web.AspNet4.Repository;
+using Fiap.Web.AspNet4.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,11 +10,11 @@ namespace Fiap.Web.AspNet4.Controllers
     public class FornecedorController : Controller
     {
 
-        private readonly FornecedorRepository fornecedorRepository;
+        private readonly IFornecedorRepository fornecedorRepository;
 
-        public FornecedorController(DataContext context)
+        public FornecedorController(IFornecedorRepository _fornecedorRepository)
         {
-            fornecedorRepository = new FornecedorRepository(context);
+            fornecedorRepository = _fornecedorRepository;
         }
 
         // GET: Fornecedor
