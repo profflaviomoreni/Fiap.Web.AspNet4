@@ -20,7 +20,10 @@ namespace Fiap.Web.AspNet4.Controllers
         // GET: Fornecedor
         public IActionResult Index()
         {
-              return View( fornecedorRepository.FindAll() );
+            //FornecedorRepository repo = new FornecedorRepository(null);
+            //var lista = repo.FindAll();
+
+            return View( fornecedorRepository.FindAll() );
         }
 
         // GET: Fornecedor/Details/5
