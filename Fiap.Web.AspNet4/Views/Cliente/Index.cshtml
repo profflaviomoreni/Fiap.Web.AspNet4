@@ -31,6 +31,41 @@
         <button type="submit" class="btn btn-primary btn-lg">Buscar</button>
     </form>
 </div>
-<br />
-<br />
+<hr />
+@if (Model.Clientes != null && Model.Clientes.Count > 0)
+{
+    <table class="table table-striped" border="1" cellspacing="0" cellpadding="0">
+        <thead>
+            <tr>
+                <th data-field="id">Id</th>
+                <th data-field="name">Nome</th>
+                <th data-field="representante">Representante</th>
+                <th class="actions" width="220">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var cliente in Model.Clientes)
+            {
+                <tr>
+                    <td data-field="id">@cliente.ClienteId</td>
+                    <td data-field="name">@cliente.Nome</td>
+                    <td data-field="representante">@cliente.Representante.NomeRepresentante</td>
+                    <td class="actions" width="220">
+
+                        <a asp-controller="cliente"
+                           asp-action="detalhe"
+                           asp-route-id="@cliente.ClienteId"
+                           class="btn btn-info btn-sm">Detalhe</a>
+
+                        <a asp-controller="cliente"
+                           asp-action="editar"
+                           asp-route-id="@cliente.ClienteId"
+                           class="btn btn-warning btn-sm">Editar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 
