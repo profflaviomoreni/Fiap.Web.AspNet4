@@ -14,11 +14,11 @@ namespace Fiap.Web.AspNet4.Repository
             dataContext = ctx;
         }
 
-        public UsuarioModel Login(string username, string password)
+        public UsuarioModel Login(UsuarioModel usuarioModel)
         {
             var usuario = dataContext.Usuarios
-                    .SingleOrDefault(x =>   x.UsuarioNome == username && 
-                                            x.UsuarioSenha == password);
+                    .SingleOrDefault(x =>   x.UsuarioEmail == usuarioModel.UsuarioEmail && 
+                                            x.UsuarioSenha == usuarioModel.UsuarioSenha);
 
             return usuario;
 
