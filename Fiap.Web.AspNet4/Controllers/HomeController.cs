@@ -1,5 +1,6 @@
 ﻿using Fiap.Web.AspNet4.Data;
 using Fiap.Web.AspNet4.Models;
+using Fiap.Web.AspNet4.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -19,7 +20,20 @@ namespace Fiap.Web.AspNet4.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var vm = new HomeViewModel();
+
+            List<PageVisitationModel> pageVisitations = new List<PageVisitationModel>();
+            //pageVisitations = pageVisitationsRepository.FilterByMonth(11);
+
+            vm.PageViewCount = pageVisitations.Count();
+            vm.PageViewGrowthPercentual = pageVisitations.Count() + 10;
+
+
+            vm.UserGrowthPercentaul = 10;
+            vm.UserCount = 1000;
+
+
+            return View(vm);
         }
 
         public IActionResult Privacy()

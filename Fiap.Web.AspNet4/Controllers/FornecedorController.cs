@@ -1,12 +1,11 @@
-﻿using Fiap.Web.AspNet4.Data;
+﻿using Fiap.Web.AspNet4.Controllers.Filters;
 using Fiap.Web.AspNet4.Models;
-using Fiap.Web.AspNet4.Repository;
 using Fiap.Web.AspNet4.Repository.Interface;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Fiap.Web.AspNet4.Controllers
 {
+    [FiapAuthFilter, FiapLogFilter]
     public class FornecedorController : Controller
     {
 

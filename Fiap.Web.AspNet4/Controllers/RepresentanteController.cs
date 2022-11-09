@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+﻿using Fiap.Web.AspNet4.Controllers.Filters;
 using Fiap.Web.AspNet4.Data;
 using Fiap.Web.AspNet4.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fiap.Web.AspNet4.Controllers
 {
+    [FiapAuthFilter]
     public class RepresentanteController : Controller
     {
         private readonly DataContext _context;

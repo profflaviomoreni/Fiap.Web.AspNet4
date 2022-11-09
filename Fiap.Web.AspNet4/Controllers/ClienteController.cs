@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using Fiap.Web.AspNet4.Data;
+using Fiap.Web.AspNet4.Controllers.Filters;
 using Fiap.Web.AspNet4.Models;
-using Fiap.Web.AspNet4.Repository;
 using Fiap.Web.AspNet4.Repository.Interface;
 using Fiap.Web.AspNet4.ViewModel;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Fiap.Web.AspNet4.Controllers
 {
+    [FiapAuthFilter]
     public class ClienteController : Controller
     {
 
@@ -27,6 +27,7 @@ namespace Fiap.Web.AspNet4.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+
             var vm = new ClientePesquisaViewModel();
             vm.Representantes = LoadRepresentantes();
 
