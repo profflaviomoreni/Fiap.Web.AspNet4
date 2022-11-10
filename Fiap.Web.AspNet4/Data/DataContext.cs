@@ -16,6 +16,13 @@ namespace Fiap.Web.AspNet4.Data
 
         public DbSet<UsuarioModel> Usuarios { get; set; }
 
+        public DbSet<ProdutoModel> Produtos { get; set; }
+
+        public DbSet<LojaModel> Lojas { get; set; }
+
+        public DbSet<ProdutoLojaModel> ProdutosLojas { get; set; }
+
+
 
         public DataContext(DbContextOptions options) : base(options)
         {

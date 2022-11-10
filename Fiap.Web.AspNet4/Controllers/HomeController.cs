@@ -1,5 +1,6 @@
 ﻿using Fiap.Web.AspNet4.Data;
 using Fiap.Web.AspNet4.Models;
+using Fiap.Web.AspNet4.Repository.Interface;
 using Fiap.Web.AspNet4.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -12,10 +13,13 @@ namespace Fiap.Web.AspNet4.Controllers
 
         private readonly DataContext dataContext;
 
+
+
         public HomeController(ILogger<HomeController> logger, DataContext ctx)
         {
             _logger = logger;
             dataContext = ctx;
+
         }
 
         public IActionResult Index()
@@ -38,6 +42,7 @@ namespace Fiap.Web.AspNet4.Controllers
 
         public IActionResult Privacy()
         {
+
 
             /*
             RepresentanteModel model = new RepresentanteModel();
