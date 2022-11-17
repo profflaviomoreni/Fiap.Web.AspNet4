@@ -38,5 +38,14 @@ namespace Fiap.Web.AspNet4.Repository
 
             return produto; 
         }
+
+        public int Insert(ProdutoModel produtoModel)
+        {
+            dataContext.Produtos.Add(produtoModel);
+            dataContext.SaveChanges();
+            return produtoModel.ProdutoId;
+        }
+
+
     }
 }
